@@ -1,0 +1,64 @@
+<%- include('includes/head.ejs') %>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <form  action="/add-data" method="POST" width:100%>
+                <div class="col-12">
+                    <div class="row">    
+                        <div class="col-md-4">
+                            <h5>Num</h5>
+                            <input type="number" name="num">
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Name</h5>
+                            <input type="text" name="name">
+                        </div>
+                        <div class="col-md-4">
+                            <h5>E-Mail</h5>
+                            <input type="email" name="mail">
+                        </div>
+                        <button class="btn btn-block btn-success mx-5 mt-5" type="submit">Add</button>
+                    </div> 
+                </div>
+            </form> 
+                <div class="col-12">
+                    <table class="table table-striped mt-5">
+                        <thead>
+                            <tr>
+                                <th>Num</th>
+                                <th>Name</th>
+                                <th>E-Mail</th>
+                                <th>Delete</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% for (let data of prods) { %>    
+                            <tr>
+                                <td><%= data.num %></td>
+                                <td><%= data.name %></td>
+                                <td><%= data.mail %></td>
+                                <td>
+                                    <form action="/delete-product" method="POST">
+                                        <input type="hidden" value="<%= data._id %>" name="productId">
+                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="/edit-product" method="POST">
+                                        <input type="hidden" value="<%= data._id %>" name="productId">
+                                        <button class="btn btn-info" type="submit">Edit</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+       
+    </div>
+
+    <%- include('includes/end.ejs') %>
+    
